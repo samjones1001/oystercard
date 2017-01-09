@@ -2,10 +2,12 @@ require 'oystercard'
 
 describe Oystercard do
     subject { described_class.new }
-    
+    let(:station) {double :station}
+
+
     max_balance = Oystercard::MAXIMUM_BALANCE
     min_fare = Oystercard::MINIMUM_FARE
-    
+
     describe '#balance' do
         it 'a new card should return 0 balance' do
             expect(subject.balance).to eq 0
@@ -34,25 +36,34 @@ describe Oystercard do
     describe '#touch_in' do
         it 'sets in_journey? to true' do
             subject.top_up(max_balance)
-            expect{subject.touch_in}.to change {subject.in_journey}.to true
+            expect{subject.touch_in(station)}.to change {subject.in_journey}.to true
         end
 
         it 'raise an error when you have less than minimum balance' do
           error_message = 'Sorry your balance is too low'
-          expect {subject.touch_in}.to raise_error error_message
+          expect {subject.touch_in(station)}.to raise_error error_message
+        end
+
+        it 'set an entry station' do
+          subject.top_up(max_balance)
+          subject.touch_in(station)
+          expect(subject.entry_station).to eq station
         end
     end
 
     describe '#touch_out' do
         before do
             subject.top_up(max_balance)
-            subject.touch_in
+            subject.touch_in(station)
         end
-        
+        it 'set entry station to nil'do
+          expect {subject.touch_out}.to change{subject.entry_station}.to nil
+        end
+
         it 'sets in_journey? to false' do
             expect{subject.touch_out}.to change {subject.in_journey}.to false
         end
-        
+
         it 'reduces balance by minimum fare' do
             expect{subject.touch_out}.to change {subject.balance}.by (-min_fare)
         end
