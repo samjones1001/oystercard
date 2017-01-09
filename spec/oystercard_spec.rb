@@ -4,9 +4,11 @@ describe Oystercard do
 
 	let (:card) {Oystercard.new}
 
-	it{ is_expected.to respond_to{:balance}}
+	it{ is_expected.to respond_to(:balance)}
 
-	it "Has an initial balance of zeor" do
+	it{ is_expected.to respond_to(:deduct).with(1).argument}
+
+	it "Has an initial balance of zero" do
 		expect(card.balance).to eq 0
 	end
 
@@ -22,4 +24,12 @@ describe Oystercard do
 
 	end
 
+	describe '#deduct' do
+
+		it 'deducts from the card balance' do
+			card.top_up(Oystercard::CARD_LIMIT)
+			expect{card.deduct(1)}.to change{card.balance}.by(-1)
+ 		end
+
+	end
 end
