@@ -1,3 +1,6 @@
+require_relative 'journey'
+require_relative 'station'
+
 class Oystercard
     MAXIMUM_BALANCE = 90
     MINIMUM_BALANCE = 1
@@ -9,7 +12,7 @@ class Oystercard
     def initialize
         @entry_station = nil
         @balance = 0
-        @journey = {}
+        @journey = Journey.new
         @journeys = []
     end
 
@@ -19,15 +22,15 @@ class Oystercard
     end
 
     def touch_in(station)
-      raise 'Sorry your balance is too low' if balance < MINIMUM_BALANCE
-        journey[:entry_station] = station
+        raise 'Sorry your balance is too low' if balance < MINIMUM_BALANCE
+        @journey.start_journey(station)
     end
 
     def touch_out(station)
         deduct(MINIMUM_FARE)
-        journey[:exit_station] = station
-        journeys << journey
-        @journey = {}
+        @journey.finish_journey(station)
+        journeys << @journey
+        @journey = Journey.new
         station
     end
     

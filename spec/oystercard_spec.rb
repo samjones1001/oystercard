@@ -53,9 +53,9 @@ describe Oystercard do
     end
     
     context 'user makes one journey' do
-        let(:entry_station) { double :station }
-        let(:exit_station) { double :station }
-        let(:journey){ {entry_station: entry_station, exit_station: exit_station}}
+        let(:entry_station) { double :entry_station, zone: 1 }
+        let(:exit_station)  { double :exit_station, zone: 2 }
+        let(:journey)       { double :journey }
         
         before do
             subject.top_up(max_balance)
@@ -63,8 +63,8 @@ describe Oystercard do
             subject.touch_out(exit_station)
         end
         
-        it 'adds journey hash to journeys' do
-            expect(subject.journeys).to include(journey)
+        it 'adds journey instance to journeys' do
+            expect(subject.journeys.count).to eq 1
         end
     end
 end
