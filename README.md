@@ -62,7 +62,10 @@ I need to have the correct fare calculated
 ## Usage Instructions
 * clone the repo and run bundle
 ```shell
-$ git clone
+$ git clone https://github.com/samjones1001/oystercard
+$ cd oystercard
+$ bundle
+$ rspec
 ```
 * run the application in irb
 
