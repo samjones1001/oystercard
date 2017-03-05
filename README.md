@@ -7,6 +7,7 @@
 This week's challenge will start with going back over the basics we covered last week in Boris Bikes, giving you the chance to reinforce what you learned last week. You'll then be challenged to build a more complex system which should really stretch your skills in Ruby, TDD and object-oriented design.
 
 ## Outline
+To further consolidate our understanding of TDD and Object Oriented Design, during week 2 of Makers Academy we were asked to design a simple command line application to simulate an oyster card.
 
 ## User Stories
 ```
@@ -69,6 +70,3 @@ $ rspec
 ```
 * run the application in irb
 
-```shell
-$ irb
-```
