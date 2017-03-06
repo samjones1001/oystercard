@@ -68,5 +68,9 @@ $ cd oystercard
 $ bundle
 $ rspec
 ```
+* run tests
+```shell
+* run tests
+```
 * run the application in irb
 
