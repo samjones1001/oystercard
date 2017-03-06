@@ -70,7 +70,7 @@ $ rspec
 ```
 * run tests
 ```shell
-* run tests
+$ rspec
 ```
 * run the application in irb
 
